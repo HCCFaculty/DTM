@@ -3238,7 +3238,7 @@ layout.GetHeight()));isChanged=true}}if(isChanged)wi.SetBboxChanged()}GetPropert
 		C3.Behaviors.Fade.Cnds.OnFadeInEnd,
 		C3.Behaviors.Fade.Cnds.OnFadeOutEnd,
 		C3.Plugins.System.Acts.GoToLayout,
-		C3.Plugins.Touch.Cnds.OnTouchStart
+		C3.Plugins.System.Cnds.OnLoadFinished
 		];
 	};
 	self.C3_JsPropNameTable = [
