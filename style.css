@@ -47,3 +47,8 @@ html, body, canvas {
 	src: url('fonts/palamecia titling.ttf') format('truetype');
 }
 
+@font-face {
+	font-family: 'lato-regular';
+	src: url('fonts/lato-regular.ttf') format('truetype');
+}
+

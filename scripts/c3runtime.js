@@ -3195,6 +3195,7 @@ layout.GetHeight()));isChanged=true}}if(isChanged)wi.SetBboxChanged()}GetPropert
 		C3.Plugins.System.Cnds.IsBetweenAngles,
 		C3.Behaviors.EightDir.Acts.SimulateControl,
 		C3.Plugins.Touch.Cnds.OnTapGestureObject,
+		C3.Plugins.Sprite.Cnds.IsVisible,
 		C3.Plugins.System.Acts.CreateObject,
 		C3.Plugins.Sprite.Acts.ZMoveToObject,
 		C3.Plugins.Sprite.Acts.SetAngle,
@@ -3657,13 +3658,13 @@ layout.GetHeight()));isChanged=true}}if(isChanged)wi.SetBboxChanged()}GetPropert
 		},
 		p => {
 			const f0 = p._GetNode(0).GetBoundMethod();
-			return () => f0(815, 1170);
+			return () => f0(800, 1170);
 		},
 		() => "Herbs",
 		() => "HerbPickup",
 		() => 815,
 		() => "End",
-		() => "Unfortunately, the herbs could not cure Sheila of her illness. She becomes another statistic in the high death rate of this society. But thanks to your hunting and gathering, the society grows..."
+		() => "Unfortunately, the herbs could not cure Sheila of her illness. She becomes another statistic in the high death rate of this society. But thanks to your hunting and gathering skills, the society grows..."
 	];
 }
 
