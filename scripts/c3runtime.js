@@ -3482,6 +3482,11 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		C3.Behaviors.Platform.Acts.SetGravity,
 		C3.Behaviors.Platform.Acts.SetIgnoreInput,
 		C3.Plugins.Sprite.Acts.SetY,
+		C3.Behaviors.Platform.Cnds.IsFalling,
+		C3.Behaviors.Platform.Acts.SimulateControl,
+		C3.Behaviors.EightDir.Acts.SetMaxSpeed,
+		C3.Behaviors.EightDir.Acts.SetAcceleration,
+		C3.Behaviors.Platform.Acts.SetMaxSpeed,
 		C3.Plugins.Sprite.Acts.SetX,
 		C3.Plugins.System.Acts.RestartLayout
 		];
@@ -3536,7 +3541,7 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{UIHerb: 0},
 		{UIApple: 0},
 		{UIWood: 0},
-		{ButtonShoot: 0},
+		{Button_Jump: 0},
 		{Cover: 0},
 		{debug: 0},
 		{Audio: 0},
@@ -3552,6 +3557,7 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{Narration2: 0},
 		{Narration3: 0},
 		{Narration4: 0},
+		{Button_Shoot: 0},
 		{Armory: 0},
 		{Church: 0},
 		{Factory: 0},
@@ -3978,7 +3984,7 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		() => 6,
 		() => "The main concern is making enough money to avoid starvation due to poverty...",
 		() => 998,
-		() => 475,
+		() => 490,
 		() => "Controls Town",
 		() => "Keyboard Town",
 		() => "SWalk",
@@ -4047,15 +4053,37 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		() => 1500,
 		() => 1000,
 		() => "Thumbstick Factory",
-		() => "Simulate Controls3",
+		() => "Jumping",
+		p => {
+			const f0 = p._GetNode(0).GetBoundMethod();
+			const f1 = p._GetNode(1).GetBoundMethod();
+			return () => f0(f1(), "Controls");
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const f2 = p._GetNode(2).GetBoundMethod();
+			const f3 = p._GetNode(3).GetBoundMethod();
+			const f4 = p._GetNode(4).GetBoundMethod();
+			const f5 = p._GetNode(5).GetBoundMethod();
+			return () => C3.toDegrees(C3.angleTo(n0.ExpObject(), n1.ExpObject(), f2(f3(), "Controls"), f4(f5(), "Controls")));
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			const f2 = p._GetNode(2).GetBoundMethod();
+			const f3 = p._GetNode(3).GetBoundMethod();
+			const f4 = p._GetNode(4).GetBoundMethod();
+			const f5 = p._GetNode(5).GetBoundMethod();
+			return () => C3.distanceTo(n0.ExpObject(), n1.ExpObject(), f2(f3(), "Controls"), f4(f5(), "Controls"));
+		},
+		() => "Simulate Controls4",
+		() => 350,
+		() => 600,
 		() => "Factory Items",
 		() => -5,
 		() => "Can",
 		() => "Open",
-		p => {
-			const n0 = p._GetNode(0);
-			return () => (n0.ExpObject() + 400);
-		},
 		() => "Scream"
 	];
 }
