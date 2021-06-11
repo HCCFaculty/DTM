@@ -3470,6 +3470,8 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		C3.Behaviors.Fade.Cnds.OnFadeOutEnd,
 		C3.Plugins.System.Acts.GoToLayout,
 		C3.Plugins.System.Cnds.OnLoadFinished,
+		C3.Plugins.Browser.Acts.RequestFullScreen,
+		C3.Plugins.Browser.Acts.LockOrientation,
 		C3.Plugins.System.Exps.layoutname,
 		C3.Plugins.Audio.Acts.StopAll,
 		C3.Plugins.System.Acts.SetGroupActive,
@@ -3490,9 +3492,7 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		C3.Plugins.Sprite.Acts.SetX,
 		C3.Plugins.System.Acts.RestartLayout,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
-		C3.Plugins.Browser.Cnds.IsFullscreen,
-		C3.Plugins.Browser.Acts.RequestFullScreen,
-		C3.Plugins.Browser.Acts.LockOrientation
+		C3.Plugins.Browser.Cnds.IsFullscreen
 		];
 	};
 	self.C3_JsPropNameTable = [
