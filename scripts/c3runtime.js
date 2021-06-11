@@ -3491,7 +3491,8 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		C3.Plugins.System.Acts.RestartLayout,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.Browser.Cnds.IsFullscreen,
-		C3.Plugins.Browser.Acts.RequestFullScreen
+		C3.Plugins.Browser.Acts.RequestFullScreen,
+		C3.Plugins.Browser.Acts.LockOrientation
 		];
 	};
 	self.C3_JsPropNameTable = [
