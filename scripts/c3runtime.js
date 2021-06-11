@@ -3488,7 +3488,10 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		C3.Behaviors.EightDir.Acts.SetAcceleration,
 		C3.Behaviors.Platform.Acts.SetMaxSpeed,
 		C3.Plugins.Sprite.Acts.SetX,
-		C3.Plugins.System.Acts.RestartLayout
+		C3.Plugins.System.Acts.RestartLayout,
+		C3.Plugins.Touch.Cnds.OnTouchStart,
+		C3.Plugins.Browser.Cnds.IsFullscreen,
+		C3.Plugins.Browser.Acts.RequestFullScreen
 		];
 	};
 	self.C3_JsPropNameTable = [
