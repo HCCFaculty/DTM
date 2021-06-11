@@ -3490,7 +3490,6 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		C3.Behaviors.EightDir.Acts.SetAcceleration,
 		C3.Behaviors.Platform.Acts.SetMaxSpeed,
 		C3.Plugins.Sprite.Acts.SetX,
-		C3.Plugins.System.Acts.RestartLayout,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
 		C3.Plugins.Browser.Cnds.IsFullscreen
 		];
@@ -3576,8 +3575,8 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{Factory2: 0},
 		{Factory3: 0},
 		{TiledBackground2: 0},
-		{Decor: 0},
-		{Road: 0},
+		{S2GreeneryTilemap: 0},
+		{S2Road: 0},
 		{S2Beggar: 0},
 		{S2Blacksmith: 0},
 		{S2Deacon: 0},
@@ -3589,6 +3588,8 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{Jumpthru: 0},
 		{Ladder: 0},
 		{Ladders: 0},
+		{SpikeX: 0},
+		{SpikeY: 0},
 		{Spikes: 0},
 		{TiledBackground3: 0},
 		{Tilemap: 0},
@@ -3597,10 +3598,16 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{Player2: 0},
 		{Walls: 0},
 		{CanIcon: 0},
+		{S2TalkSpace: 0},
 		{TutText: 0},
 		{TextStage2Tut: 0},
-		{S2TalkSpace: 0},
 		{LoadingText: 0},
+		{S3Buildings: 0},
+		{S3RoadTilemap: 0},
+		{S3LandTilemap: 0},
+		{S3DecorTilemap: 0},
+		{FactoryText: 0},
+		{decor_: 0},
 		{StepStage1: 0},
 		{ApplesCollected: 0},
 		{WoodCollected: 0},
@@ -3618,7 +3625,9 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{RichmanFed: 0},
 		{DeaconFed: 0},
 		{PeopleFed: 0},
-		{HasCan: 0}
+		{HasCan: 0},
+		{SpawnX: 0},
+		{SpawnY: 0}
 	];
 }
 
@@ -3982,9 +3991,11 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		},
 		() => "Stage 2 Town",
 		() => "Factory",
+		() => "Close",
+		() => "Open",
 		() => "In the industrial society, life expectancy has increased.",
 		() => "The death rate drops due to better sanitation and food storage technology.",
-		() => "Although the birth rate is still high, the population increases rapidly.",
+		() => "The birth rate is still high so the population increases rapidly.",
 		() => 6,
 		() => "The main concern is making enough money to avoid starvation due to poverty...",
 		() => 998,
@@ -4087,8 +4098,8 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		() => "Factory Items",
 		() => -5,
 		() => "Can",
-		() => "Open",
-		() => "Scream"
+		() => "Scream",
+		() => "Although the birth rate is still high, the population increases rapidly."
 	];
 }
 
