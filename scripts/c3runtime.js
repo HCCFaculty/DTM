@@ -1414,16 +1414,17 @@ value;break;case "instance-variable":target.SetInstanceVariableValue(index,value
 (wi,v)=>wi.OffsetHeight(v),(wi,v)=>wi.SetHeight(v),wi=>wi.GetHeight(),true);add("offsetAngle",(wi,v)=>wi.OffsetAngle(v),(wi,v)=>wi.SetAngle(v),wi=>wi.GetAngle(),false);add("offsetOpacity",(wi,v,t,a)=>{const o=wi.GetOpacity();const nv=o+v;const min=0;const max=1;if(a._clampAccumulator===0){if(nv>max)a._clampAccumulator+=nv-max;else if(nv<min)a._clampAccumulator+=nv;wi.OffsetOpacity(v)}else{const nv=wi.GetOpacity()+v;if(v>0&&a._clampAccumulator>0){if(nv>max)a._clampAccumulator+=nv-max}else if(v>0&&
 a._clampAccumulator<0){a._clampAccumulator+=v;if(a._clampAccumulator>0)a._clampAccumulator=0}else if(v<0&&a._clampAccumulator>0){a._clampAccumulator+=v;if(a._clampAccumulator<0)a._clampAccumulator=0}else if(v<0&&a._clampAccumulator<0)if(nv<min)a._clampAccumulator+=nv}},(wi,v)=>{wi.SetOpacity(v)},wi=>{return wi.GetOpacity()},false);add("offsetOriginX",(wi,v)=>wi.OffsetOriginX(v),(wi,v)=>wi.SetOriginX(v),wi=>wi.GetOriginX(),false);add("offsetOriginY",(wi,v)=>wi.OffsetOriginY(v),(wi,v)=>wi.SetOriginY(v),
 wi=>wi.GetOriginY(),false);add("offsetZElevation",(wi,v)=>wi.OffsetZElevation(v),(wi,v)=>wi.SetZElevation(v),wi=>wi.GetZElevation(),true);add("offsetScaleX",(wi,v,t)=>{const mirrorFactor=wi.GetWidth()<0?-1:1;if(wi.GetTransformWithParentWidth()){const parentWi=wi.GetParent();const sgi=wi._GetSceneGraphInfo();wi.OffsetWidth(parentWi.GetWidth()*sgi.GetStartScaleX()*mirrorFactor*v)}else wi.OffsetWidth(t.GetOriginalWidth()*mirrorFactor*v)},(wi,v,t)=>{wi.SetWidth(t.GetOriginalWidth()*v)},(wi,t)=>{const mirrorFactor=
-wi.GetWidth()<0?-1:1;if(wi.GetTransformWithParentWidth()){const parentWi=wi.GetParent();const parentTrack=t.GetTimeline().GetTrackInstance(parentWi.GetInstance());const parentScale=parentWi.GetWidth()/parentTrack.GetOriginalWidth();return wi.GetWidth()*mirrorFactor/(t.GetOriginalWidth()*parentScale)}else return wi.GetWidth()*mirrorFactor/t.GetOriginalWidth()},false);add("offsetScaleY",(wi,v,t)=>{const flipFactor=wi.GetHeight()<0?-1:1;if(wi.GetTransformWithParentHeight()){const parentWi=wi.GetParent();
-const sgi=wi._GetSceneGraphInfo();wi.OffsetHeight(parentWi.GetHeight()*sgi.GetStartScaleY()*flipFactor*v)}else wi.OffsetHeight(t.GetOriginalHeight()*flipFactor*v)},(wi,v,t)=>{wi.SetHeight(t.GetOriginalHeight()*v)},(wi,t)=>{const flipFactor=wi.GetHeight()<0?-1:1;if(wi.GetTransformWithParentHeight()){const parentWi=wi.GetParent();const parentTrack=t.GetTimeline().GetTrackInstance(parentWi.GetInstance());const parentScale=parentWi.GetHeight()/parentTrack.GetOriginalHeight();return wi.GetHeight()*flipFactor/
-(t.GetOriginalHeight()*parentScale)}else return wi.GetHeight()*flipFactor/t.GetOriginalHeight()},false);class NumericInterpolationAdapter extends C3.PropertyTrackState.PropertyInterpolationAdapter{constructor(sourceAdapter){super(sourceAdapter);this._lastValue=0;this._clampAccumulator=0;this._instance_getter=null;this._instance_setter=null;this._instance_absolute_setter=null;this._round=false;if(C3.IsInstanceOf(this._propertyTrack.GetTimeline(),C3.Tween))this._typeAdapter=new C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTween(this);
-else this._typeAdapter=new C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTimeline(this);const property=this._propertyTrack.GetPropertyName();if(this._propertyTrack.GetSourceAdapterId()==="world-instance"){const p=INSTANCE_FUNC_MAP.get(property);this._instance_getter=p.getter;this._instance_setter=p.setter;this._instance_absolute_setter=p.absolute_setter;this._round=p.round}}Release(){this._typeAdapter=null;this._instance_getter=null;this._instance_setter=null;this._instance_absolute_setter=
-null;super.Release()}GetLastValue(){return this._lastValue}SetLastValue(v){this._lastValue=v}SetInitialState(){const initValue=this._typeAdapter.SetInitialState();if(typeof initValue==="number")this._lastValue=initValue;this._clampAccumulator=0}SetResumeState(){const resumeValue=this._typeAdapter.SetResumeState();if(typeof resumeValue==="number")this._lastValue=resumeValue}GetCurrentState(){return this._Getter()}CompareInitialStateWithCurrent(){const firstKeyframeValue=this._FirstKeyframeGetter();
-return firstKeyframeValue!==this.GetCurrentState()}CompareSaveStateWithCurrent(){if(C3.IsNullOrUndefined(this._saveState))return false;return this._saveState!==this.GetCurrentState()}BeforeChangeProperty(){this._typeAdapter.BeforeChangeProperty()}ChangeProperty(time,value,start,end,setTime,ensureValue){return this._typeAdapter.ChangeProperty(time,value,start,end,setTime,ensureValue)}AfterChangeProperty(){this._typeAdapter.AfterChangeProperty()}_Getter(){const target=this._GetTarget();const index=
-this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();return this._PickSource(()=>target.GetPropertyValueByIndex(index),()=>target[index],()=>target.GetInstanceVariableValue(index),()=>target.GetPropertyValueByIndex(index),()=>this._instance_getter(wi,track))}_Setter(value,start,end){const target=this._GetTarget();const index=this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();this._PickSource(()=>target.OffsetPropertyValueByIndex(index,
-value),()=>target[index]+=value,()=>target.SetInstanceVariableOffset(index,value),()=>target.OffsetPropertyValueByIndex(index,value),()=>this._instance_setter(wi,value,track,this))}_SetterAbsolute(value,start,end){const target=this._GetTarget();const index=this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();this._PickSource(()=>target.SetPropertyValueByIndex(index,value),()=>target[index]=value,()=>target.SetInstanceVariableValue(index,value),()=>target.SetPropertyValueByIndex(index,
-value),()=>this._instance_absolute_setter(wi,value,track))}_MaybeEnsureValue(time,start,end,setTime,lastValue,currentValue){this._typeAdapter._MaybeEnsureValue(time,start,end,setTime,lastValue,currentValue)}_AddDelta(value,start,end){const stringValue=value.toString();const decimalsString=stringValue.split(".")[1]||"";const decimalPlaces=decimalsString.length;const v=this._Getter();let rv;if(decimalPlaces===0)rv=this._round?Math.round(v):v;else rv=C3.toFixed(v,decimalPlaces);this._Setter(rv-v,start,
-end)}_SaveToJson(){return Object.assign(super._SaveToJson(),{"v":this._lastValue,"a":this._clampAccumulator})}_LoadFromJson(o){if(!o)return;super._LoadFromJson(o);this._lastValue=o["v"];this._clampAccumulator=o["a"]}}C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapter=NumericInterpolationAdapter};
+wi.GetWidth()<0?-1:1;if(wi.GetTransformWithParentWidth()){const parentWi=wi.GetParent();const parentTrack=t.GetTimeline().GetTrackInstance(parentWi.GetInstance());let parentScale=NaN;if(parentTrack)parentScale=parentWi.GetWidth()/parentTrack.GetOriginalWidth();else{const sdki=parentWi.GetInstance().GetSdkInstance();if(sdki.IsOriginalSizeKnown())parentScale=parentWi.GetWidth()/sdki.GetOriginalWidth();else parentScale=1}return wi.GetWidth()*mirrorFactor/(t.GetOriginalWidth()*parentScale)}else return wi.GetWidth()*
+mirrorFactor/t.GetOriginalWidth()},false);add("offsetScaleY",(wi,v,t)=>{const flipFactor=wi.GetHeight()<0?-1:1;if(wi.GetTransformWithParentHeight()){const parentWi=wi.GetParent();const sgi=wi._GetSceneGraphInfo();wi.OffsetHeight(parentWi.GetHeight()*sgi.GetStartScaleY()*flipFactor*v)}else wi.OffsetHeight(t.GetOriginalHeight()*flipFactor*v)},(wi,v,t)=>{wi.SetHeight(t.GetOriginalHeight()*v)},(wi,t)=>{const flipFactor=wi.GetHeight()<0?-1:1;if(wi.GetTransformWithParentHeight()){const parentWi=wi.GetParent();
+const parentTrack=t.GetTimeline().GetTrackInstance(parentWi.GetInstance());let parentScale=NaN;if(parentTrack)parentScale=parentWi.GetHeight()/parentTrack.GetOriginalHeight();else{const sdki=parentWi.GetInstance().GetSdkInstance();if(sdki.IsOriginalSizeKnown())parentScale=parentWi.GetHeight()/sdki.GetOriginalHeight();else parentScale=1}return wi.GetHeight()*flipFactor/(t.GetOriginalHeight()*parentScale)}else return wi.GetHeight()*flipFactor/t.GetOriginalHeight()},false);class NumericInterpolationAdapter extends C3.PropertyTrackState.PropertyInterpolationAdapter{constructor(sourceAdapter){super(sourceAdapter);
+this._lastValue=0;this._clampAccumulator=0;this._instance_getter=null;this._instance_setter=null;this._instance_absolute_setter=null;this._round=false;if(C3.IsInstanceOf(this._propertyTrack.GetTimeline(),C3.Tween))this._typeAdapter=new C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTween(this);else this._typeAdapter=new C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapterForTimeline(this);const property=this._propertyTrack.GetPropertyName();
+if(this._propertyTrack.GetSourceAdapterId()==="world-instance"){const p=INSTANCE_FUNC_MAP.get(property);this._instance_getter=p.getter;this._instance_setter=p.setter;this._instance_absolute_setter=p.absolute_setter;this._round=p.round}}Release(){this._typeAdapter=null;this._instance_getter=null;this._instance_setter=null;this._instance_absolute_setter=null;super.Release()}GetLastValue(){return this._lastValue}SetLastValue(v){this._lastValue=v}SetInitialState(){const initValue=this._typeAdapter.SetInitialState();
+if(typeof initValue==="number")this._lastValue=initValue;this._clampAccumulator=0}SetResumeState(){const resumeValue=this._typeAdapter.SetResumeState();if(typeof resumeValue==="number")this._lastValue=resumeValue}GetCurrentState(){return this._Getter()}CompareInitialStateWithCurrent(){const firstKeyframeValue=this._FirstKeyframeGetter();return firstKeyframeValue!==this.GetCurrentState()}CompareSaveStateWithCurrent(){if(C3.IsNullOrUndefined(this._saveState))return false;return this._saveState!==this.GetCurrentState()}BeforeChangeProperty(){this._typeAdapter.BeforeChangeProperty()}ChangeProperty(time,
+value,start,end,setTime,ensureValue){return this._typeAdapter.ChangeProperty(time,value,start,end,setTime,ensureValue)}AfterChangeProperty(){this._typeAdapter.AfterChangeProperty()}_Getter(){const target=this._GetTarget();const index=this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();return this._PickSource(()=>target.GetPropertyValueByIndex(index),()=>target[index],()=>target.GetInstanceVariableValue(index),()=>target.GetPropertyValueByIndex(index),()=>this._instance_getter(wi,
+track))}_Setter(value,start,end){const target=this._GetTarget();const index=this._GetIndex();const track=this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();this._PickSource(()=>target.OffsetPropertyValueByIndex(index,value),()=>target[index]+=value,()=>target.SetInstanceVariableOffset(index,value),()=>target.OffsetPropertyValueByIndex(index,value),()=>this._instance_setter(wi,value,track,this))}_SetterAbsolute(value,start,end){const target=this._GetTarget();const index=this._GetIndex();const track=
+this._propertyTrack.GetTrack();const wi=this.GetWorldInfo();this._PickSource(()=>target.SetPropertyValueByIndex(index,value),()=>target[index]=value,()=>target.SetInstanceVariableValue(index,value),()=>target.SetPropertyValueByIndex(index,value),()=>this._instance_absolute_setter(wi,value,track))}_MaybeEnsureValue(time,start,end,setTime,lastValue,currentValue){this._typeAdapter._MaybeEnsureValue(time,start,end,setTime,lastValue,currentValue)}_AddDelta(value,start,end){const stringValue=value.toString();
+const decimalsString=stringValue.split(".")[1]||"";const decimalPlaces=decimalsString.length;const v=this._Getter();let rv;if(decimalPlaces===0)rv=this._round?Math.round(v):v;else rv=C3.toFixed(v,decimalPlaces);this._Setter(rv-v,start,end)}_SaveToJson(){return Object.assign(super._SaveToJson(),{"v":this._lastValue,"a":this._clampAccumulator})}_LoadFromJson(o){if(!o)return;super._LoadFromJson(o);this._lastValue=o["v"];this._clampAccumulator=o["a"]}}C3.PropertyTrackState.PropertyInterpolationAdapter.NumericInterpolationAdapter=
+NumericInterpolationAdapter};
 
 
 // c3/timelines/state/propertyInterpolationAdapters/numericInterpolationAdapterForTimeline.js
@@ -3346,6 +3347,46 @@ SetEnabled(en){this._SetEnabled(en!==0)},FallThrough(){this._FallThroughJumpThru
 VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()*1E3}}};
 
 
+'use strict';{const C3=self.C3;C3.Behaviors.Car=class CarBehavior extends C3.SDKBehaviorBase{constructor(opts){super(opts)}Release(){super.Release()}}};
+
+
+'use strict';{const C3=self.C3;C3.Behaviors.Car.Type=class CarType extends C3.SDKBehaviorTypeBase{constructor(behaviorType){super(behaviorType)}Release(){super.Release()}OnCreate(){}}};
+
+
+'use strict';{const C3=self.C3;const C3X=self.C3X;const IBehaviorInstance=self.IBehaviorInstance;const MAX_SPEED=0;const ACCELERATION=1;const DEACCELERATION=2;const STEER_SPEED=3;const DRIFT_RECOVER=4;const FRICTION=5;const SET_ANGLE=6;const DEFAULT_CONTROLS=7;const ENABLE=8;C3.Behaviors.Car.Instance=class CarInstance extends C3.SDKBehaviorInstanceBase{constructor(behInst,properties){super(behInst);const wi=this.GetWorldInfo();this._upKey=false;this._downKey=false;this._leftKey=false;this._rightKey=
+false;this._ignoreInput=false;this._simUp=false;this._simDown=false;this._simLeft=false;this._simRight=false;const a=wi.GetAngle();this._s=0;this._a=a;this._m=a;this._lastX=wi.GetX();this._lastY=wi.GetY();this._lastAngle=a;this._maxSpeed=300;this._acc=200;this._dec=300;this._steerSpeed=C3.toRadians(225);this._driftRecover=C3.toRadians(185);this._friction=.4;this._setAngle=true;this._defaultControls=true;this._isEnabled=true;if(properties){this._maxSpeed=properties[MAX_SPEED];this._acc=properties[ACCELERATION];
+this._dec=properties[DEACCELERATION];this._steerSpeed=C3.toRadians(properties[STEER_SPEED]);this._driftRecover=C3.toRadians(properties[DRIFT_RECOVER]);this._friction=properties[FRICTION];this._setAngle=!!properties[SET_ANGLE];this._defaultControls=!!properties[DEFAULT_CONTROLS];this._isEnabled=!!properties[ENABLE]}if(this._isEnabled)this._StartTicking();if(this._defaultControls)this._BindEvents()}_BindEvents(){if(this._disposables)return;const rt=this._runtime.Dispatcher();this._disposables=new C3.CompositeDisposable(C3.Disposable.From(rt,
+"keydown",e=>this._OnKeyDown(e.data)),C3.Disposable.From(rt,"keyup",e=>this._OnKeyUp(e.data)),C3.Disposable.From(rt,"window-blur",()=>this._OnWindowOrKeyboardBlur()),C3.Disposable.From(rt,"keyboard-blur",()=>this._OnWindowOrKeyboardBlur()))}_UnBindEvents(){if(!this._disposables)return;this._disposables.Release();this._disposables=null}Release(){super.Release()}_OnKeyDown(data){switch(data["key"]){case "ArrowLeft":this._leftKey=true;break;case "ArrowUp":this._upKey=true;break;case "ArrowRight":this._rightKey=
+true;break;case "ArrowDown":this._downKey=true;break}}_OnKeyUp(data){switch(data["key"]){case "ArrowLeft":this._leftKey=false;break;case "ArrowUp":this._upKey=false;break;case "ArrowRight":this._rightKey=false;break;case "ArrowDown":this._downKey=false;break}}_OnWindowOrKeyboardBlur(){this._upKey=false;this._downKey=false;this._leftKey=false;this._rightKey=false}SaveToJson(){return{"ii":this._ignoreInput,"e":this._isEnabled,"s":this._s,"a":this._a,"m":this._m,"ms":this._maxSpeed,"acc":this._acc,"dec":this._dec,
+"ss":this._steerSpeed,"dr":this._driftRecover,"f":this._friction,"sa":this._setAngle,"dc":this._defaultControls,"lx":this._lastX,"ly":this._lastY,"la":this._lastAngle}}LoadFromJson(o){this._ignoreInput=o["ii"];this._SetEnabled(o["e"]);this._s=o["s"];this._a=o["a"];this._m=o["m"];this._maxSpeed=o["ms"];this._acc=o["acc"];this._dec=o["dec"];this._steerSpeed=o["ss"];this._driftRecover=o["dr"];this._friction=o["f"];this._setAngle=o["sa"];this._defaultControls=o["dc"];this._lastX=o["lx"];this._lastY=o["ly"];
+this._lastAngle=o["la"];this._upKey=false;this._downKey=false;this._leftKey=false;this._rightKey=false;this._simUp=false;this._simDown=false;this._simLeft=false;this._simRight=false;this._defaultControls?this._BindEvents():this._UnBindEvents()}Tick(){const dt=this._runtime.GetDt(this._inst);const wi=this.GetWorldInfo();const collisionEngine=this._runtime.GetCollisionEngine();let left=this._leftKey||this._simLeft;let right=this._rightKey||this._simRight;let up=this._upKey||this._simUp;let down=this._downKey||
+this._simDown;this._simLeft=false;this._simRight=false;this._simUp=false;this._simDown=false;if(!this._isEnabled)return;const a=wi.GetAngle();if(this._setAngle&&a!==this._lastAngle){this._a=a;this._m=a;this._lastAngle=a}const collInst=collisionEngine.TestOverlapSolid(this._inst);if(collInst){collisionEngine.RegisterCollision(this._inst,collInst);if(!collisionEngine.PushOutSolidNearest(this._inst))return}if(this._ignoreInput){left=false;right=false;up=false;down=false}if(up&&!down){this._s+=this._acc*
+dt;if(this._s>this._maxSpeed)this._s=this._maxSpeed}if(down&&!up){this._s-=this._dec*dt;if(this._s<-this._maxSpeed)this._s=-this._maxSpeed}if(down===up)if(this._s>0){this._s-=this._dec*dt*.1;if(this._s<0)this._s=0}else if(this._s<0){this._s+=this._dec*dt*.1;if(this._s>0)this._s=0}if(this._s<0){const temp=left;left=right;right=temp}if(left&&!right)this._a=C3.clampAngle(this._a-this._steerSpeed*dt*(Math.abs(this._s)/this._maxSpeed));if(right&&!left)this._a=C3.clampAngle(this._a+this._steerSpeed*dt*
+(Math.abs(this._s)/this._maxSpeed));let recover=this._driftRecover*dt;const diff=C3.angleDiff(this._a,this._m);if(diff>C3.toRadians(90))recover+=diff-C3.toRadians(90);if(diff<=recover)this._m=C3.clampAngle(this._a);else if(C3.angleClockwise(this._a,this._m))this._m=C3.clampAngle(this._m+recover);else this._m=C3.clampAngle(this._m-recover);this._lastX=wi.GetX();this._lastY=wi.GetY();if(this._s!==0&&dt!==0){wi.OffsetXY(Math.cos(this._m)*this._s*dt,Math.sin(this._m)*this._s*dt);if(this._setAngle){wi.SetAngle(this._a);
+this._lastAngle=this._a}wi.SetBboxChanged();const hitSolid=collisionEngine.TestOverlapSolid(this._inst);if(hitSolid){collisionEngine.RegisterCollision(this._inst,hitSolid);this._s=Math.abs(this._s);this._m=collisionEngine.CalculateBounceAngle(this._inst,this._lastX,this._lastY,null);wi.OffsetXY(Math.cos(this._m)*this._s*dt,Math.sin(this._m)*this._s*dt);wi.SetBboxChanged();this._s*=1-this._friction;if(!collisionEngine.PushOutSolid(this._inst,Math.cos(this._m),Math.sin(this._m),Math.max(this._s*2.5*
+dt,30)))collisionEngine.PushOutSolidNearest(this._inst,100)}}else if(this._setAngle&&wi.GetAngle()!==this._a){wi.SetAngle(this._a);this._lastAngle=this._a;wi.SetBboxChanged();if(collisionEngine.TestOverlapSolid(this._inst))collisionEngine.PushOutSolidNearest(this._inst,100)}}GetPropertyValueByIndex(index){switch(index){case MAX_SPEED:return this._GetMaxSpeed();case ACCELERATION:return this._GetAcceleration();case DEACCELERATION:return this._GetDeceleration();case STEER_SPEED:return C3.toDegrees(this._GetSteerSpeed());
+case DRIFT_RECOVER:return C3.toDegrees(this._GetDriftRecover());case FRICTION:return this._GetFriction();case SET_ANGLE:return this._setAngle;case DEFAULT_CONTROLS:return this._IsDefaultControls();case ENABLE:return this._IsEnabled()}}SetPropertyValueByIndex(index,value){switch(index){case MAX_SPEED:this._SetMaxSpeed(value);break;case ACCELERATION:this._SetAcceleration(value);break;case DEACCELERATION:this._SetDeceleration(value);break;case STEER_SPEED:this._SetSteerSpeed(C3.toRadians(value));break;
+case DRIFT_RECOVER:this._SetDriftRecover(C3.toRadians(value));break;case FRICTION:this._SetFriction(value);break;case SET_ANGLE:this._setAngle=!!value;break;case DEFAULT_CONTROLS:this._SetDefaultControls(!!value);break;case ENABLE:this._SetEnabled(!!value);break}}_Stop(){this._s=0}_SetSpeed(s){this._s=C3.clamp(s,-this._maxSpeed,this._maxSpeed)}_GetSpeed(){return this._s}_SetMaxSpeed(ms){this._maxSpeed=Math.max(ms,0)}_GetMaxSpeed(){return this._maxSpeed}_SetAcceleration(acc){this._acc=Math.max(acc,
+0)}_GetAcceleration(){return this._acc}_SetDeceleration(dec){this._dec=Math.max(dec,0)}_GetDeceleration(){return this._dec}_GetMovingAngle(){return this._m}_GetVectorX(){return Math.cos(this._m)*this._s}_GetVectorY(){return Math.sin(this._m)*this._s}_SetSteerSpeed(x){this._steerSpeed=x}_GetSteerSpeed(){return this._steerSpeed}_SetDriftRecover(x){this._driftRecover=x}_GetDriftRecover(){return this._driftRecover}_SetFriction(x){this._friction=x}_GetFriction(){return this._friction}_SimulateControl(ctrl){if(!this._isEnabled)return;
+switch(ctrl){case 0:this._simLeft=true;break;case 1:this._simRight=true;break;case 2:this._simUp=true;break;case 3:this._simDown=true;break}}_SetIgnoreInput(i){this._ignoreInput=!!i}_IsIgnoreInput(){return this._ignoreInput}_SetDefaultControls(d){d=!!d;if(this._defaultControls===d)return;this._defaultControls=d;if(this._defaultControls)this._BindEvents();else{this._UnBindEvents();this._OnWindowOrKeyboardBlur()}}_IsDefaultControls(){return this._defaultControls}_SetEnabled(e){this._isEnabled=!!e;if(this._isEnabled)this._StartTicking();
+else{this._simLeft=false;this._simRight=false;this._simUp=false;this._simDown=false;this._StopTicking()}}_IsEnabled(){return this._isEnabled}GetDebuggerProperties(){const prefix="behaviors.car";return[{title:"$"+this.GetBehaviorType().GetName(),properties:[{name:prefix+".debugger.speed",value:this._GetSpeed(),onedit:v=>this._SetSpeed(v)},{name:prefix+".debugger.angle-of-motion",value:C3.toDegrees(this._GetMovingAngle()),onedit:v=>this._m=C3.toRadians(v)},{name:prefix+".debugger.vector-x",value:this._GetVectorX()},
+{name:prefix+".debugger.vector-y",value:this._GetVectorY()},{name:prefix+".properties.max-speed.name",value:this._GetMaxSpeed(),onedit:v=>this._SetMaxSpeed(v)},{name:prefix+".properties.acceleration.name",value:this._GetAcceleration(),onedit:v=>this._SetAcceleration(v)},{name:prefix+".properties.deceleration.name",value:this._GetDeceleration(),onedit:v=>this._SetDeceleration(v)},{name:prefix+".properties.steer-speed.name",value:C3.toDegrees(this._GetSteerSpeed()),onedit:v=>this._SetSteerSpeed(C3.toRadians(v))},
+{name:prefix+".properties.drift-recover.name",value:C3.toDegrees(this._GetDriftRecover()),onedit:v=>this._SetDriftRecover(C3.toRadians(v))},{name:prefix+".properties.friction.name",value:this._GetFriction(),onedit:v=>this._SetFriction(v)},{name:prefix+".properties.enabled.name",value:this._IsEnabled(),onedit:v=>this._SetEnabled(v)}]}]}GetScriptInterfaceClass(){return self.ICarBehaviorInstance}};const map=new WeakMap;const SIMULATE_CONTROL_MAP=new Map([["left",0],["right",1],["up",2],["down",3]]);
+self.ICarBehaviorInstance=class ICarBehaviorInstance extends IBehaviorInstance{constructor(){super();map.set(this,IBehaviorInstance._GetInitInst().GetSdkInstance())}stop(){map.get(this)._Stop()}simulateControl(ctrl){C3X.RequireString(ctrl);const index=SIMULATE_CONTROL_MAP.get(ctrl);if(typeof index!=="number")throw new Error("invalid control");map.get(this)._SimulateControl(index)}get speed(){return map.get(this)._GetSpeed()}set speed(s){C3X.RequireFiniteNumber(s);map.get(this)._SetSpeed(s)}get maxSpeed(){return map.get(this)._GetMaxSpeed()}set maxSpeed(s){C3X.RequireFiniteNumber(s);
+map.get(this)._SetMaxSpeed(s)}get acceleration(){return map.get(this)._GetAcceleration()}set acceleration(a){C3X.RequireFiniteNumber(a);map.get(this)._SetAcceleration(a)}get deceleration(){return map.get(this)._GetDeceleration()}set deceleration(d){C3X.RequireFiniteNumber(d);map.get(this)._SetDeceleration(d)}get vectorX(){return map.get(this)._GetVectorX()}get vectorY(){return map.get(this)._GetVectorY()}get angleOfMotion(){return map.get(this)._GetMovingAngle()}set steerSpeed(x){C3X.RequireFiniteNumber(x);
+map.get(this)._SetSteerSpeed(x)}get steerSpeed(){return map.get(this)._GetSteerSpeed()}set driftRecover(x){C3X.RequireFiniteNumber(x);map.get(this)._SetDriftRecover(x)}get driftRecover(){return map.get(this)._GetDriftRecover()}set friction(x){C3X.RequireFiniteNumber(x);map.get(this)._SetFriction(x)}get friction(){return map.get(this)._GetFriction()}get isDefaultControls(){return map.get(this)._IsDefaultControls()}set isDefaultControls(d){map.get(this)._SetDefaultControls(!!d)}get isIgnoringInput(){return map.get(this)._IsIgnoreInput()}set isIgnoringInput(e){map.get(this)._SetIgnoreInput(!!e)}get isEnabled(){return map.get(this)._IsEnabled()}set isEnabled(e){map.get(this)._SetEnabled(!!e)}}};
+
+
+'use strict';{const C3=self.C3;C3.Behaviors.Car.Cnds={IsMoving(){return this._GetSpeed()!==0},CompareSpeed(cmp,s){return C3.compare(this._GetSpeed(),cmp,s)},IsEnabled(){return this._IsEnabled()}}};
+
+
+'use strict';{const C3=self.C3;C3.Behaviors.Car.Acts={Stop(){this._Stop()},SetIgnoreInput(i){this._SetIgnoreInput(i!==0)},SetSpeed(s){this._SetSpeed(s)},SetMaxSpeed(ms){this._SetMaxSpeed(ms)},SetAcceleration(acc){this._SetAcceleration(acc)},SetDeceleration(dec){this._SetDeceleration(dec)},SimulateControl(ctrl){this._SimulateControl(ctrl)},SetEnabled(e){this._SetEnabled(e!==0)},SetSteerSpeed(x){this._SetSteerSpeed(C3.toRadians(x))},SetDriftRecover(x){this._SetDriftRecover(C3.toRadians(x))},SetFriction(x){this._SetFriction(x)},
+SetDefaultControls(d){this._SetDefaultControls(d)}}};
+
+
+'use strict';{const C3=self.C3;C3.Behaviors.Car.Exps={Speed(){return this._GetSpeed()},MaxSpeed(){return this._GetMaxSpeed()},Acceleration(){return this._GetAcceleration()},Deceleration(){return this._GetDeceleration()},MovingAngle(){return C3.toDegrees(this._GetMovingAngle())},VectorX(){return this._GetVectorX()},VectorY(){return this._GetVectorY()},SteerSpeed(){return C3.toDegrees(this._GetSteerSpeed())},DriftRecover(){return C3.toDegrees(this._GetDriftRecover())},Friction(){return this._GetFriction()}}};
+
+
 {
 	const C3 = self.C3;
 	self.C3_GetObjectRefTable = function () {
@@ -3369,6 +3410,7 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		C3.Plugins.Tilemap,
 		C3.Behaviors.jumpthru,
 		C3.Behaviors.Platform,
+		C3.Behaviors.Car,
 		C3.Plugins.System.Cnds.IsGroupActive,
 		C3.Plugins.System.Cnds.OnLayoutStart,
 		C3.Behaviors.Pathfinding.Acts.AddObstacle,
@@ -3491,7 +3533,24 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		C3.Behaviors.Platform.Acts.SetMaxSpeed,
 		C3.Plugins.Sprite.Acts.SetX,
 		C3.Plugins.Touch.Cnds.OnTouchStart,
-		C3.Plugins.Browser.Cnds.IsFullscreen
+		C3.Plugins.Browser.Cnds.IsFullscreen,
+		C3.Plugins.Audio.Cnds.IsTagPlaying,
+		C3.Behaviors.Car.Acts.Stop,
+		C3.Plugins.System.Acts.SetLayerScale,
+		C3.Behaviors.scrollto.Acts.SetEnabled,
+		C3.Behaviors.EightDir.Acts.SetEnabled,
+		C3.Behaviors.Car.Acts.SetEnabled,
+		C3.Plugins.Tilemap.Exps.PositionToTileX,
+		C3.Plugins.Tilemap.Exps.PositionToTileY,
+		C3.Plugins.Tilemap.Cnds.CompareTileAt,
+		C3.Plugins.Tilemap.Acts.EraseTile,
+		C3.Behaviors.Car.Acts.SetSpeed,
+		C3.Behaviors.Car.Exps.Speed,
+		C3.Plugins.Sprite.Exps.Angle,
+		C3.Plugins.System.Acts.Scroll,
+		C3.Behaviors.Car.Acts.SetIgnoreInput,
+		C3.Plugins.Sprite.Cnds.CompareX,
+		C3.Plugins.Text.Acts.Destroy
 		];
 	};
 	self.C3_JsPropNameTable = [
@@ -3535,10 +3594,10 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{BoundToLayout: 0},
 		{Player1: 0},
 		{Character: 0},
-		{popup_: 0},
+		{Popup: 0},
 		{Speech: 0},
 		{TalkSheila: 0},
-		{TalkSpace: 0},
+		{TalkSpaceS1: 0},
 		{PickupHerb: 0},
 		{UIBoar: 0},
 		{UIHerb: 0},
@@ -3561,6 +3620,7 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{Narration3: 0},
 		{Narration4: 0},
 		{Button_Shoot: 0},
+		{NarrationArrow: 0},
 		{Armory: 0},
 		{Church: 0},
 		{Factory: 0},
@@ -3598,17 +3658,48 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{Player2: 0},
 		{Walls: 0},
 		{CanIcon: 0},
-		{S2TalkSpace: 0},
+		{TalkSpaceS2: 0},
 		{TutText: 0},
 		{TextStage2Tut: 0},
-		{LoadingText: 0},
-		{S3Buildings: 0},
-		{S3RoadTilemap: 0},
-		{S3LandTilemap: 0},
-		{S3DecorTilemap: 0},
-		{FactoryText: 0},
 		{decor_: 0},
-		{NarrationArrow: 0},
+		{FactoryText: 0},
+		{TalkSpaceS3: 0},
+		{LoadingText: 0},
+		{Car: 0},
+		{Pink: 0},
+		{Racer: 0},
+		{Corvette: 0},
+		{Pickup: 0},
+		{Shadow: 0},
+		{Van: 0},
+		{Ashley: 0},
+		{Manny: 0},
+		{Citi: 0},
+		{Helix: 0},
+		{Jewel: 0},
+		{Player3: 0},
+		{Drake: 0},
+		{Selia: 0},
+		{Shelly: 0},
+		{Stella: 0},
+		{DealerTwin: 0},
+		{Dealer: 0},
+		{Ray: 0},
+		{S3Buildings: 0},
+		{S3DecorTilemap: 0},
+		{S3LandTilemap: 0},
+		{S3RoadTilemap: 0},
+		{S3TreesTilemap: 0},
+		{PlayerWalls: 0},
+		{MiniMap: 0},
+		{PlayerMarker: 0},
+		{CharacterMarker: 0},
+		{CorvetteIcon: 0},
+		{PickupIcon: 0},
+		{PinkIcon: 0},
+		{Key: 0},
+		{DeliverySpace: 0},
+		{Girls: 0},
 		{StepStage1: 0},
 		{ApplesCollected: 0},
 		{WoodCollected: 0},
@@ -3628,7 +3719,14 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		{PeopleFed: 0},
 		{HasCan: 0},
 		{SpawnX: 0},
-		{SpawnY: 0}
+		{SpawnY: 0},
+		{GetTileY: 0},
+		{GetTileX: 0},
+		{GirlsPickedUp: 0},
+		{MapStep: 0},
+		{S3Paused: 0},
+		{Keys: 0},
+		{IsDriving: 0}
 	];
 }
 
@@ -3997,7 +4095,7 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		() => "In the industrial society, life expectancy has increased.",
 		() => 545,
 		() => 171,
-		() => "The death rate drops due to better sanitation, health care and food storage technology and production.",
+		() => "The death rate drops due to better sanitation, better health care and food storage technology and production.",
 		() => 296,
 		() => 237,
 		() => "The birth rate is still high so the population increases rapidly.",
@@ -4044,13 +4142,14 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		() => 240,
 		() => 208.5,
 		() => 7,
-		() => "Despite the dangers of industrialization and factory work, canned food increases the food supply and better sanitation and clean water has increased both the quality of\nlife and life expectancy.",
+		() => "Despite the dangers of industrialization and factory work, canned food increases the food supply and better sanitation, clean water, and better health care has increased both the quality of life and life expectancy.",
 		() => 265,
 		() => 223,
 		() => 285,
 		() => 8,
 		() => 60,
 		() => "The society grows and social issues begin to take the spotlight over survival...",
+		() => 2.5,
 		() => 758,
 		() => 261,
 		() => "Tutorial Text",
@@ -4112,8 +4211,118 @@ VectorY(){return this._GetVectorY()},JumpSustain(){return this._GetJumpSustain()
 		() => -5,
 		() => "Can",
 		() => "Scream",
-		() => "The death rate drops due to better sanitation and food storage technology.",
-		() => "Although the birth rate is still high, the population increases rapidly."
+		() => "Start L3",
+		() => "As urbanization continues, more people move to cities in search of better jobs.",
+		() => 175,
+		() => "Longer life expectancy and families choosing to have less children slows the population growth moderately.",
+		() => 335,
+		() => "Economic and social changes bring about a higher standard of living and a greater focus on education, especially for women...",
+		() => 450,
+		() => 305,
+		() => "Keys",
+		() => "Map Steps",
+		() => "Dealer",
+		() => "Green",
+		() => "Off",
+		() => "DealerTwin",
+		() => "Ashley",
+		() => "Selia",
+		() => "Shelly",
+		() => "Citi",
+		() => "Stella",
+		() => "Jewel",
+		() => "Helix",
+		() => "MiniMap",
+		() => "PlayerMap",
+		() => "Racer",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() / 42.66666);
+		},
+		() => "Corvette",
+		() => "Pink",
+		() => "Van",
+		() => "Truck",
+		() => "Characters",
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() / 42.6666);
+		},
+		() => 84.7032573488396,
+		() => 39.726624572850895,
+		() => 128.3439505374227,
+		() => 64.57041339127092,
+		() => "Drake",
+		() => "Manny",
+		() => "Ray",
+		() => "Car",
+		() => 0.6,
+		() => -300,
+		p => {
+			const n0 = p._GetNode(0);
+			const n1 = p._GetNode(1);
+			return () => n0.ExpObject(n1.ExpObject());
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpBehavior() * 0.4);
+		},
+		() => 4035,
+		() => 1765,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 75);
+		},
+		() => "Delivery",
+		() => 3680,
+		() => 1760,
+		() => 3700,
+		() => 1750,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 40);
+		},
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() - 10);
+		},
+		() => 3760,
+		() => 1630,
+		() => 1.5,
+		p => {
+			const n0 = p._GetNode(0);
+			return () => (n0.ExpObject() + 100);
+		},
+		() => "Speech S3",
+		() => "Set 1",
+		() => "AshleySmall",
+		() => "Thanks for the lift!\nI'm excited to go to school!",
+		() => "SeliaSmall",
+		() => "I'm going to become a mechanic!\nJust watch!",
+		() => "Set 2",
+		() => "CitiSmall",
+		() => "StellaSmall",
+		() => "ShellySmall",
+		() => "Set 3",
+		() => "JewelSmall",
+		() => "HelixSmall",
+		() => "DealerSmall",
+		() => "We're hiring drivers.\nIf you're interested, pick up the keys from my brother in the market.",
+		() => "Hop in the truck and bring the girls to school. I'll mark the map for you.",
+		() => "Awesome!\nI have 3 more for you.\nTake the director's car.",
+		() => "Oh no!\nThey're late for class!\nTake the lambo and GO!",
+		() => "DealerTwinSmall",
+		() => "You're the new driver?\nIt's no lamborghini but\nyou can take my pickup.\nHere are the keys.",
+		() => "Controls Town2",
+		() => "Keyboard Town2",
+		() => "WalkS",
+		() => "WalkB",
+		() => "WalkF",
+		() => "IdleB",
+		() => "IdleF",
+		() => "IdleS",
+		() => "Thumbstick Town2",
+		() => "Simulate Controls3"
 	];
 }
 
