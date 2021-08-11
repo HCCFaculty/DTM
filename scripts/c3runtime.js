@@ -3726,6 +3726,7 @@ SetDefaultControls(d){this._SetDefaultControls(d)}}};
 		{MapStep: 0},
 		{S3Paused: 0},
 		{Keys: 0},
+		{S3End: 0},
 		{IsDriving: 0}
 	];
 }
@@ -4296,16 +4297,21 @@ SetDefaultControls(d){this._SetDefaultControls(d)}}};
 		() => "Speech S3",
 		() => "Set 1",
 		() => "AshleySmall",
-		() => "Thanks for the lift!\nI'm excited to go to school!",
+		() => "I'm an only child so I\nam going to study hard\nto get a good job to\nsupport my family.",
 		() => "SeliaSmall",
-		() => "I'm going to become a mechanic!\nJust watch!",
+		() => "My cousin's family moved to the city, so I can't pet the cow on\ntheir farm anymore.",
 		() => "Set 2",
 		() => "CitiSmall",
+		() => "My brother got a new\njob in the electronics\nstore near our house.\nHow exciting!",
 		() => "StellaSmall",
+		() => "My parents gave me some money so I'm\ngoing to the toy store \nafter school!",
 		() => "ShellySmall",
+		() => "I'm going to visit my grandma this weekend. It's her 90th birthday!",
 		() => "Set 3",
 		() => "JewelSmall",
+		() => "We're buying a new house! My mom and I\nare going to look at houses after school.",
 		() => "HelixSmall",
+		() => "My mom is a doctor. Today she is giving a lecture on family planning at City Hall.",
 		() => "DealerSmall",
 		() => "We're hiring drivers.\nIf you're interested, pick up the keys from my brother in the market.",
 		() => "Hop in the truck and bring the girls to school. I'll mark the map for you.",
@@ -4322,7 +4328,19 @@ SetDefaultControls(d){this._SetDefaultControls(d)}}};
 		() => "IdleF",
 		() => "IdleS",
 		() => "Thumbstick Town2",
-		() => "Simulate Controls3"
+		() => "Simulate Controls3",
+		() => "End S3",
+		() => 200,
+		() => 80,
+		() => "Increased access to contraception and impovements in education of family planning lead to more women becoming educated and contributing to the workforce.",
+		() => 750,
+		() => 195,
+		() => "Fewer children need to work on farms due to the mechanization of farming and the standard of living increases to the point luxury is the new normal.",
+		() => 650,
+		() => 340,
+		() => 9,
+		() => "The economy grows and consumer society begins to flourish...",
+		() => 620
 	];
 }
 
